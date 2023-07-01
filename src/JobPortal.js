@@ -7,42 +7,41 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const ClientReviews = () => {
     const reviews = [
-      { company: 'Google', review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.' },
-      { company: 'Microsoft', review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.' },
-      // Add more reviews as needed
+        { company: 'Google', review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.' },
+        { company: 'Microsoft', review: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.' },
+        // Add more reviews as needed
     ];
-  
+
     return (
-      <section className="reviews">
-        <h2>Client Reviews</h2>
-        <Carousel autoPlay interval={5000} infiniteLoop>
-          {reviews.map((review, index) => (
-            <div key={index}>
-              <h3>{review.company}</h3>
-              <p>{review.review}</p>
-            </div>
-          ))}
-        </Carousel>
-      </section>
+        <section className="reviews">
+            <h2>Client Reviews</h2>
+            <Carousel autoPlay interval={5000} infiniteLoop>
+                {reviews.map((review, index) => (
+                    <div key={index}>
+                        <h3>{review.company}</h3>
+                        <p>{review.review}</p>
+                    </div>
+                ))}
+            </Carousel>
+        </section>
     );
-  };
-  
+};
+
 
 
 
 const JobPortal = () => {
     const [jobs, setJobs] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [responseJSON, setResponseJSON] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleInputChange = async (e) => {
+        setSearchQuery(e.target.value);
         try {
             const response = await axios.get(
                 'https://jobsearch4.p.rapidapi.com/api/v1/Jobs/Search',
                 {
                     params: {
-                        SearchQuery: searchQuery,
+                        SearchQuery: e.target.value,
                     },
                     headers: {
                         'X-RapidAPI-Key': '1b43b998e8mshecf18b614780362p1be75ejsne18f9cebbd57',
@@ -51,12 +50,10 @@ const JobPortal = () => {
                 }
             );
             setJobs(response.data);
-            setResponseJSON(JSON.stringify(response.data, null, 2));
         } catch (error) {
             console.error(error);
         }
     };
-
     // Demo job offers data
     const demoJobOffers = [
         { id: 1, title: 'Demo Job 1', company: 'Demo Company 1', url: '#' },
@@ -64,7 +61,7 @@ const JobPortal = () => {
         { id: 3, title: 'Demo Job 3', company: 'Demo Company 3', url: '#' },
     ];
 
-    
+
 
     return (
         <div className="job-portal">
@@ -81,14 +78,13 @@ const JobPortal = () => {
             <header>
                 <h1>Job Portal</h1>
                 <p>Find your dream job today!</p>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <input
                         type="text"
                         placeholder="Search jobs..."
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={handleInputChange}
                     />
-                    <button type="submit">Search</button>
                 </form>
             </header>
 
@@ -140,7 +136,7 @@ const JobPortal = () => {
                 </div>
             </section>
 
-            <ClientReviews/>
+            <ClientReviews />
 
 
             {/* We Support You Section */}
@@ -158,7 +154,7 @@ const JobPortal = () => {
             {/* Contact Form */}
             <section className="contact-us">
                 <h2>Contact Us</h2>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <div>
                         <label htmlFor="name">Name</label>
                         <input type="text" id="name" name="name" required />
