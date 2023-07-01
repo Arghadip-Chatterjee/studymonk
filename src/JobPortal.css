@@ -260,6 +260,11 @@ h2 {
   margin-bottom: 20px;
 }
 
+.contact-us form{
+  display: flex;
+  flex-direction: column;
+}
+
 .contact-us label {
   display: block;
   font-size: 16px;
@@ -301,11 +306,6 @@ h2 {
   margin-bottom: 30px;
 }
 
-/* Make the contact form elements vertical */
-.contact-us form div {
-  display: flex;
-  flex-direction: column;
-}
 
 
 /* Blog Section */
