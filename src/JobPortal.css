@@ -14,14 +14,14 @@ body {
 }
 
 .job-portal {
-  max-width: 1200px;
+  max-width: 1700px;
   margin: 0 auto;
   padding: 20px;
 }
 
 /* Navigation */
 nav {
-  background-color: #333;
+  background-color: #121b52;
 }
 
 nav ul {
